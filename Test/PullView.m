@@ -31,11 +31,13 @@
 - (void)createUI{
     
         _dataArr = [NSMutableArray array];
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 50) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 88 - 70 - 50) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 200;
         _tableView.separatorStyle = NO;
+    _tableView.showsVerticalScrollIndicator = NO;
+    _tableView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_tableView];
     
 }
@@ -59,6 +61,7 @@
     if (self.frame.origin.y < 200) {
         self.frame = CGRectMake(rect.origin.x, 200, rect.size.width, rect.size.height);
     }
+    _tableView.frame = CGRectMake(0, 50, self.bounds.size.width, self.bounds.size.height - 50);
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -83,6 +86,7 @@
     if (!cell) {
         cell = [[SmallTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
