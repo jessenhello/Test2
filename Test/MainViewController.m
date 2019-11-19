@@ -17,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor grayColor];
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 88, 100, 50)];
     btn.center = self.view.center;
@@ -27,11 +26,21 @@
     [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view.
 }
-
+- (void)dealloc{
+    NSLog(@"555");
+}
 - (void)btnClick:(UIButton *)sender{
     FirstViewController *firstVC = [[FirstViewController alloc]init];
-    [self.navigationController pushViewController:firstVC animated:YES];
-    
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:firstVC];
+    //其实实际开发中应该这么写
+   
+ UIWindow *windows = [UIApplication sharedApplication].windows.firstObject;
+ 
+//    NSSet *set =[UIApplication sharedApplication].connectedScenes;
+//    UIWindowScene *sczene = [set anyObject];
+//    UIWindow *windows = scene.windows[0];
+    windows.rootViewController = nav;
+
 }
 /*
 #pragma mark - Navigation
